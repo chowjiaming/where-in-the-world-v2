@@ -1,11 +1,13 @@
-import {Flex} from '@chakra-ui/react';
-import Meta from '@/components/Meta';
+import type {NextPage} from 'next';
+import {Meta} from '@/components/Meta';
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <>
       <Meta />
-      <Flex as={'main'} minH={'100vh'} />
+      <h1>Hello World</h1>
     </>
   );
-}
+};
+
+export default Home;

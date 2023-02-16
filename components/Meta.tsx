@@ -1,7 +1,7 @@
 import type {NextPage} from 'next';
 import Head from 'next/head';
 
-interface Props {
+type Props = {
   title?: string;
   page?: string;
   keywords?: string;
@@ -16,9 +16,9 @@ interface Props {
   imageHeight?: string;
   twitterCard?: string;
   twitterName?: string;
-}
+};
 
-const Meta: NextPage<Props> = ({
+export const Meta: NextPage<Props> = ({
   title,
   page,
   keywords,
@@ -70,8 +70,6 @@ const Meta: NextPage<Props> = ({
   );
 };
 
-export default Meta;
-
 Meta.defaultProps = {
   title: 'Where in the World',
   page: '',
@@ -90,3 +88,5 @@ Meta.defaultProps = {
   twitterCard: 'summary_large_image',
   twitterName: '@chowjiaming',
 };
+
+Meta.displayName = 'Meta';
