@@ -1,4 +1,3 @@
-import type {FunctionComponent} from 'react';
 import type {Variants} from 'framer-motion';
 import type {IconType} from 'react-icons';
 import {Icon, Tooltip, chakra, ColorProps} from '@chakra-ui/react';
@@ -11,13 +10,13 @@ type AnimatedIconProps = {
   variants: Variants;
   onClick: () => void;
 };
-export const AnimatedIconButton: FunctionComponent<AnimatedIconProps> = ({
+export function AnimatedIconButton({
   icon,
   label,
   colour,
   variants,
   onClick,
-}: AnimatedIconProps): JSX.Element => {
+}: AnimatedIconProps): JSX.Element {
   return (
     <Tooltip label={label}>
       <MotionButton
@@ -39,6 +38,8 @@ export const AnimatedIconButton: FunctionComponent<AnimatedIconProps> = ({
       </MotionButton>
     </Tooltip>
   );
-};
+}
 
 const MotionButton = chakra(motion.button);
+
+AnimatedIconButton.displayName = 'AnimatedIconButton';

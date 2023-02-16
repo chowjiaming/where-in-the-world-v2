@@ -1,8 +1,7 @@
-import type {FunctionComponent} from 'react';
 import {ButtonGroup, Flex, IconButton, Link, Text} from '@chakra-ui/react';
 import {FaGithub, FaLinkedin, FaTwitter} from 'react-icons/fa';
 
-export const Footer: FunctionComponent = (): JSX.Element => {
+export function Footer(): JSX.Element {
   return (
     <Flex
       as="footer"
@@ -51,6 +50,6 @@ export const Footer: FunctionComponent = (): JSX.Element => {
       </ButtonGroup>
     </Flex>
   );
-};
+}
 
 Footer.displayName = 'Footer';

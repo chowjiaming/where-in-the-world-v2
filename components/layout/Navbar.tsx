@@ -1,9 +1,8 @@
-import type {FunctionComponent} from 'react';
 import {Flex, Heading} from '@chakra-ui/react';
 import {ColorModeToggle} from '@/components/shared/ColorModeToggle';
 import Image from 'next/image';
 
-export const Navbar: FunctionComponent = (): JSX.Element => {
+export function Navbar(): JSX.Element {
   return (
     <Flex
       as="nav"
@@ -36,6 +35,6 @@ export const Navbar: FunctionComponent = (): JSX.Element => {
       />
     </Flex>
   );
-};
+}
 
 Navbar.displayName = 'Navbar';

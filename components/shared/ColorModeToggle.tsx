@@ -1,14 +1,11 @@
-import type {FunctionComponent} from 'react';
 import type {FlexProps} from '@chakra-ui/react';
 import {Flex, useColorMode} from '@chakra-ui/react';
 import {FaSun, FaMoon} from 'react-icons/fa';
 import {AnimatePresence} from 'framer-motion';
-import {enterExitSpin} from '@/utils/animations';
+import {enterExitSpin} from '@/utils/settings/animations';
 import {AnimatedIconButton} from '@/components/shared/AnimatedIconButton';
 
-export const ColorModeToggle: FunctionComponent<FlexProps> = (
-  props: FlexProps
-): JSX.Element => {
+export function ColorModeToggle(props: FlexProps): JSX.Element {
   const {colorMode, toggleColorMode} = useColorMode();
   const isDarkMode = colorMode === 'dark';
 
@@ -35,4 +32,6 @@ export const ColorModeToggle: FunctionComponent<FlexProps> = (
       </AnimatePresence>
     </Flex>
   );
-};
+}
+
+ColorModeToggle.displayName = 'ColorModeToggle';

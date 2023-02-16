@@ -1,6 +1,5 @@
-import type {NextPage} from 'next';
 import {Meta} from '@/components/Meta';
-import type {Country} from '@/types/countries';
+import type {Country} from '@/utils/types/country';
 import {
   Card,
   CardHeader,
@@ -30,8 +29,7 @@ export async function getStaticProps() {
 type Props = {
   countries: Country[];
 };
-const Home: NextPage<Props> = ({countries}) => {
-  console.log('countries', countries);
+export default function Home({countries}: Props): JSX.Element {
   return (
     <>
       <Meta />
@@ -44,7 +42,7 @@ const Home: NextPage<Props> = ({countries}) => {
         }}
         gap="6"
       >
-        {countries?.map((country) => (
+        {countries.map((country) => (
           <Card key={country.cca3}>
             <CardHeader>
               <Heading as="h2" size="lg">
@@ -80,6 +78,4 @@ const Home: NextPage<Props> = ({countries}) => {
       </Grid>
     </>
   );
-};
-
-export default Home;
+}

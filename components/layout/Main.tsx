@@ -1,8 +1,7 @@
-import type {FunctionComponent} from 'react';
 import type {FlexProps} from '@chakra-ui/react';
 import {Flex} from '@chakra-ui/react';
 
-export const Main: FunctionComponent<FlexProps> = (props): JSX.Element => {
+export function Main(props: FlexProps): JSX.Element {
   return (
     <Flex
       as="main"
@@ -19,6 +18,6 @@ export const Main: FunctionComponent<FlexProps> = (props): JSX.Element => {
       {props.children}
     </Flex>
   );
-};
+}
 
 Main.displayName = 'Main';
