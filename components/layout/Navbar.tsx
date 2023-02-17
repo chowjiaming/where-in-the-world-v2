@@ -1,6 +1,7 @@
 import {Flex, Heading} from '@chakra-ui/react';
 import {ColorModeToggle} from '@/components/shared/buttons/ColorModeToggle';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export function Navbar(): JSX.Element {
   return (
@@ -12,7 +13,14 @@ export function Navbar(): JSX.Element {
       minH="20"
       boxShadow="rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px"
     >
-      <Flex align="center" gap="4">
+      <Flex
+        as={Link}
+        href="/"
+        target="_self"
+        rel="noopener noreferrer"
+        align="center"
+        gap="4"
+      >
         <Image
           src="/svg/logo.svg"
           alt="Where in the World logo"

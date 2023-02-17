@@ -1,29 +1,23 @@
+import {Country} from '@/utils/types/country';
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  GridItem,
-  Text,
-  Tooltip,
+  CardHeader,
   Flex,
   Heading,
+  Text,
+  Tooltip,
 } from '@chakra-ui/react';
-import type {Country} from '@/utils/types/country';
+import {Meta} from '@/components/Meta';
 import Image from 'next/image';
-import Link from 'next/link';
 
-type Props = {
-  country: Country;
-};
-export function CountryCard({country}: Props): JSX.Element {
+const URL = 'https://restcountries.com/v3.1/';
+
+export default function CountryPage({country}: {country: Country}) {
   return (
-    <GridItem
-      as={Link}
-      href={`/country/${country.name.common.toLowerCase()}`}
-      target="_self"
-      rel="noopener noreferrer"
-    >
+    <>
+      <Meta page={country.name.common} icon={country.flags.svg} />
       <Card>
         <CardHeader>
           <Heading as="h2" size="lg">
@@ -56,8 +50,23 @@ export function CountryCard({country}: Props): JSX.Element {
           </Text>
         </CardFooter>
       </Card>
-    </GridItem>
+    </>
   );
 }
 
-CountryCard.displayName = 'CountryCard';
+export async function getStaticPaths() {
+  const res = await fetch(`${URL}all`);
+  const countries: Country[] = await res.json();
+  const paths = countries.map((country) => ({
+    params: {name: country.name.common.toLowerCase()},
+  }));
+
+  return {paths, fallback: false};
+}
+
+export async function getStaticProps({params}: {params: {name: string}}) {
+  const res = await fetch(`${URL}name/${params.name}`);
+  const country: Country[] = await res.json();
+
+  return {props: {country: country[0]}};
+}

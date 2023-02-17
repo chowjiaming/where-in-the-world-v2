@@ -4,6 +4,7 @@ import Head from 'next/head';
 type Props = {
   title?: string;
   page?: string;
+  icon?: string;
   keywords?: string;
   description?: string;
   websiteUrl?: string;
@@ -21,6 +22,7 @@ type Props = {
 export const Meta: NextPage<Props> = ({
   title,
   page,
+  icon,
   keywords,
   description,
   websiteUrl,
@@ -46,7 +48,7 @@ export const Meta: NextPage<Props> = ({
       <meta name="keywords" content={keywords}></meta>
       <link rel="canonical" href={websiteUrl} />
       <meta name="description" content={description} />
-      <link rel="icon" href="/my-favicon.ico" />
+      <link rel="icon" href={icon ? icon : '/my-favicon.ico'} />
       <title>{`${title}${page ? ` | ${page}` : ''}`}</title>
       {/* Open Graph */}
       <meta property="og:url" content={websiteUrl} />
