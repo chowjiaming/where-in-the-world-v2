@@ -19,13 +19,13 @@ export function usePagination<I>({
 
   const previousPages =
     currentPage > 1
-      ? generatePagesArray(currentPage - 2 - siblingsCount, currentPage - 1)
+      ? generatePagesArray(currentPage - 1 - siblingsCount, currentPage - 1)
       : [];
   const nextPages =
     currentPage < lastPage
       ? generatePagesArray(
           currentPage,
-          Math.min(currentPage + siblingsCount, lastPage) + 1
+          Math.min(currentPage + siblingsCount, lastPage)
         )
       : [];
 

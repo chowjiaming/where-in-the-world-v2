@@ -3,7 +3,7 @@ import {Flex, useColorMode} from '@chakra-ui/react';
 import {FaSun, FaMoon} from 'react-icons/fa';
 import {AnimatePresence} from 'framer-motion';
 import {enterExitSpin} from '@/utils/settings/animations';
-import {AnimatedIconButton} from '@/components/shared/AnimatedIconButton';
+import {AnimatedIconButton} from '@/components/shared/buttons/AnimatedIconButton';
 
 export function ColorModeToggle(props: FlexProps): JSX.Element {
   const {colorMode, toggleColorMode} = useColorMode();

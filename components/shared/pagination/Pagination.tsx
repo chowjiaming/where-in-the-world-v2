@@ -20,73 +20,71 @@ export function Pagination({
   colorScheme,
 }: PaginationProps): JSX.Element {
   return (
-    <Stack direction="row" mb="8" justify="flex-end" align="center" spacing="6">
-      <Stack direction="row" spacing="4">
-        {currentPage > 1 + siblingsCount ? (
-          <>
+    <Stack direction="row" spacing="4" align="end">
+      {currentPage > 1 + siblingsCount ? (
+        <>
+          <PaginationItem
+            colorScheme={colorScheme}
+            onPageChange={onPageChange}
+            page={1}
+          />
+          {currentPage > 2 + siblingsCount ? (
             <PaginationItem
               colorScheme={colorScheme}
               onPageChange={onPageChange}
-              page={1}
+              page={currentPage}
+              isBackwards
             />
-            {currentPage > 2 + siblingsCount ? (
-              <PaginationItem
-                colorScheme={colorScheme}
-                onPageChange={onPageChange}
-                page={currentPage}
-                isBackwards
-              />
-            ) : null}
-          </>
-        ) : null}
+          ) : null}
+        </>
+      ) : null}
 
-        {previousPages.length > 0
-          ? previousPages.map((page) => (
-              <PaginationItem
-                colorScheme={colorScheme}
-                onPageChange={onPageChange}
-                page={page}
-                key={page}
-              />
-            ))
-          : null}
-
-        <PaginationItem
-          colorScheme={colorScheme}
-          onPageChange={onPageChange}
-          page={currentPage}
-          isCurrent
-        />
-
-        {nextPages.length > 0
-          ? nextPages.map((page) => (
-              <PaginationItem
-                colorScheme={colorScheme}
-                onPageChange={onPageChange}
-                page={page}
-                key={page}
-              />
-            ))
-          : null}
-
-        {currentPage + siblingsCount < lastPage ? (
-          <>
-            {currentPage + 1 + siblingsCount < lastPage ? (
-              <PaginationItem
-                colorScheme={colorScheme}
-                onPageChange={onPageChange}
-                page={currentPage}
-                isForwards
-              />
-            ) : null}
+      {previousPages.length > 0
+        ? previousPages.map((page) => (
             <PaginationItem
               colorScheme={colorScheme}
               onPageChange={onPageChange}
-              page={lastPage}
+              page={page}
+              key={page}
             />
-          </>
-        ) : null}
-      </Stack>
+          ))
+        : null}
+
+      <PaginationItem
+        colorScheme={colorScheme}
+        onPageChange={onPageChange}
+        page={currentPage}
+        isCurrent
+      />
+
+      {nextPages.length > 0
+        ? nextPages.map((page) => (
+            <PaginationItem
+              colorScheme={colorScheme}
+              onPageChange={onPageChange}
+              page={page}
+              key={page}
+            />
+          ))
+        : null}
+
+      {currentPage + siblingsCount < lastPage ? (
+        <>
+          {currentPage + 1 + siblingsCount < lastPage ? (
+            <PaginationItem
+              colorScheme={colorScheme}
+              onPageChange={onPageChange}
+              page={currentPage}
+              isForwards
+            />
+          ) : null}
+          <PaginationItem
+            colorScheme={colorScheme}
+            onPageChange={onPageChange}
+            page={lastPage}
+          />
+        </>
+      ) : null}
     </Stack>
   );
 }

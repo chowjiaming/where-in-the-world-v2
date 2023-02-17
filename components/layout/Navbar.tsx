@@ -1,5 +1,5 @@
 import {Flex, Heading} from '@chakra-ui/react';
-import {ColorModeToggle} from '@/components/shared/ColorModeToggle';
+import {ColorModeToggle} from '@/components/shared/buttons/ColorModeToggle';
 import Image from 'next/image';
 
 export function Navbar(): JSX.Element {

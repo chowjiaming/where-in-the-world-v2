@@ -2,7 +2,6 @@ import type {FlexProps} from '@chakra-ui/react';
 import {Flex} from '@chakra-ui/react';
 
 export function Main(props: FlexProps): JSX.Element {
-  console.log('props', props);
   return (
     <Flex
       as="main"

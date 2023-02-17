@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Meta} from '@/components/Meta';
-import {CountriesGrid} from '@/components/shared/CountriesGrid';
+import {CountriesGrid} from '@/components/countries/CountriesGrid';
 import type {Country} from '@/utils/types/country';
 
 const URL = 'https://restcountries.com/v3.1/';
