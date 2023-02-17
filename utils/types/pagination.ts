@@ -1,4 +1,4 @@
-export type Options<I> = {
+export type PaginationOptions<I> = {
   totalRegisters: number;
   page: number;
   items: I[];
@@ -6,7 +6,7 @@ export type Options<I> = {
   siblingsCount?: number;
 };
 
-export type Pagination<I> = {
+export type PaginationType<I> = {
   pageItems: I[];
   totalPages: number;
   itemsPerPage: number;

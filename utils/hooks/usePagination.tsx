@@ -1,4 +1,4 @@
-import {Options, Pagination} from '@/utils/types/pagination';
+import {PaginationOptions, PaginationType} from '@/utils/types/pagination';
 
 function generatePagesArray(from: number, to: number): number[] {
   return [...new Array(to - from)]
@@ -12,7 +12,7 @@ export function usePagination<I>({
   items,
   itemsPerPage = 10,
   siblingsCount = 1,
-}: Options<I>): Pagination<I> {
+}: PaginationOptions<I>): PaginationType<I> {
   const currentPage = page;
   const lastPage = Math.ceil(totalRegisters / itemsPerPage);
   const totalPages = lastPage === 0 ? 1 : lastPage;
