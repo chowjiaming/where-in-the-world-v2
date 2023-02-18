@@ -15,6 +15,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import {Fragment} from 'react';
+import type {Currencies, Languages} from '@/utils/types/country';
 import type {CountryPageProps} from '@/pages/country/[name]';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -34,16 +35,18 @@ export function CountryCard({
         <Heading as="h2" size="lg" mr="2">
           {country.name.common}
         </Heading>
-        <Box w="8" h="8">
-          <Image
-            src={country.coatOfArms.svg}
-            alt={`Coat of arms of ${country.name.common}`}
-            width={24}
-            height={24}
-            style={{width: 'auto', height: 'auto'}}
-            priority
-          />
-        </Box>
+        {country.coatOfArms.svg && (
+          <Box w="8" h="8">
+            <Image
+              src={country.coatOfArms.svg}
+              alt={`Coat of arms of ${country.name.common}`}
+              width={24}
+              height={24}
+              style={{width: 'auto', height: 'auto'}}
+              priority
+            />
+          </Box>
+        )}
       </CardHeader>
       <CardBody
         as={Flex}
@@ -78,7 +81,9 @@ export function CountryCard({
           <GridItem>
             <Text wordBreak="keep-all">
               <Text as="strong">Native Name:</Text>{' '}
-              {Object.values(country.name.nativeName)[0].official}
+              {country.name.nativeName
+                ? Object.values(country.name.nativeName)[0].official
+                : 'No data 😔'}
             </Text>
           </GridItem>
           <GridItem>
@@ -118,23 +123,33 @@ export function CountryCard({
           <GridItem>
             <Text wordBreak="keep-all">
               <Text as="strong">Currencies:</Text>{' '}
-              {Object.keys(country.currencies).map((key, i) => (
-                <Fragment key={key}>
-                  {i > 0 && ', '}
-                  <Text as="span">{country.currencies[key].name}</Text>
-                </Fragment>
-              ))}
+              {country.currencies
+                ? Object.keys(country.currencies).map((key, i) => (
+                    <Fragment key={key}>
+                      {i > 0 && ', '}
+                      <Text as="span">
+                        {country.currencies &&
+                          country.currencies[key as keyof Currencies]?.name}
+                      </Text>
+                    </Fragment>
+                  ))
+                : 'No data 😔'}
             </Text>
           </GridItem>
           <GridItem>
             <Text wordBreak="keep-all">
               <Text as="strong">Languages:</Text>{' '}
-              {Object.keys(country.languages).map((key, i) => (
-                <Fragment key={key}>
-                  {i > 0 && ', '}
-                  <Text as="span">{country.languages[key]}</Text>
-                </Fragment>
-              ))}
+              {country.languages
+                ? Object.keys(country.languages).map((key, i) => (
+                    <Fragment key={key}>
+                      {i > 0 && ', '}
+                      <Text as="span">
+                        {country.languages &&
+                          country.languages[key as keyof Languages]}
+                      </Text>
+                    </Fragment>
+                  ))
+                : 'No data 😔'}
             </Text>
           </GridItem>
           <GridItem>
@@ -173,6 +188,7 @@ export function CountryCard({
                 key={key}
                 as={Link}
                 href={`/country/${key.toLowerCase()}`}
+                textTransform="capitalize"
               >
                 {key}
               </Button>

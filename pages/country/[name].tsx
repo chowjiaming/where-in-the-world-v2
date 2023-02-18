@@ -7,7 +7,10 @@ import {CountryCard} from '@/components/country/CountryPageCard';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 
-const URL = 'https://restcountries.com/v3.1/';
+const URL =
+  process.env.NODE_ENV === 'development'
+    ? `http://localhost:${process.env.PORT}/api/countries/`
+    : `${process.env.URL}/api/countries/`;
 
 export type CountryPageProps = {
   country: Country;
@@ -45,7 +48,7 @@ export default function CountryPage(props: CountryPageProps): JSX.Element {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`${URL}all`);
+  const res = await fetch(URL);
   const countries: Country[] = await res.json();
   const paths = countries.map((country) => {
     return {
@@ -57,18 +60,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch(`${URL}name/${context?.params?.name}?fullText=true`);
-  const country: Country[] = await res.json();
+  const res = await fetch(`${URL}name/${context?.params?.name}`);
+  const country: Country = await res.json();
 
-  const borderCountries = country[0].borders
+  const borderCountries = country.borders
     ? await Promise.all(
-        country[0].borders.map(async (borderCode) => {
-          const res = await fetch(`${URL}alpha/${borderCode}`);
-          const borderCountries: Country[] = await res.json();
-          return borderCountries[0].name.common;
+        country.borders.map(async (borderCode) => {
+          const res = await fetch(`${URL}cca3/${borderCode}`);
+          const borderCountries: Country = await res.json();
+          return borderCountries;
         })
       )
     : [];
 
-  return {props: {country: country[0], borderCountries}};
+  return {props: {country: country, borderCountries}};
 };
