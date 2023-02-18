@@ -4,7 +4,10 @@ import {Meta} from '@/components/Meta';
 import {CountriesGrid} from '@/components/countries/CountriesGrid';
 import type {Country} from '@/utils/types/country';
 
-const URL = 'https://restcountries.com/v3.1/';
+const URL =
+  process.env.NODE_ENV === 'development'
+    ? `http://localhost:${process.env.PORT}/api/countries/`
+    : `${process.env.URL}/api/countries/`;
 
 type CountriesProps = {
   countries: Country[];
@@ -13,7 +16,12 @@ type CountriesProps = {
 export const getStaticProps: GetStaticProps = async (): Promise<{
   props: CountriesProps;
 }> => {
-  const res = await fetch(`${URL}all`);
+  const res = await fetch(URL, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   const countries: Country[] = await res.json();
 
   return {

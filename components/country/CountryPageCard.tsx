@@ -15,6 +15,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import {Fragment} from 'react';
+import type {Currencies, Languages} from '@/utils/types/country';
 import type {CountryPageProps} from '@/pages/country/[name]';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -34,16 +35,18 @@ export function CountryCard({
         <Heading as="h2" size="lg" mr="2">
           {country.name.common}
         </Heading>
-        <Box w="8" h="8">
-          <Image
-            src={country.coatOfArms.svg}
-            alt={`Coat of arms of ${country.name.common}`}
-            width={24}
-            height={24}
-            style={{width: 'auto', height: 'auto'}}
-            priority
-          />
-        </Box>
+        {country.coatOfArms.svg && (
+          <Box w="8" h="8">
+            <Image
+              src={country.coatOfArms.svg}
+              alt={`Coat of arms of ${country.name.common}`}
+              width={24}
+              height={24}
+              style={{width: 'auto', height: 'auto'}}
+              priority
+            />
+          </Box>
+        )}
       </CardHeader>
       <CardBody
         as={Flex}
@@ -124,7 +127,10 @@ export function CountryCard({
                 ? Object.keys(country.currencies).map((key, i) => (
                     <Fragment key={key}>
                       {i > 0 && ', '}
-                      <Text as="span">{country.currencies[key].name}</Text>
+                      <Text as="span">
+                        {country.currencies &&
+                          country.currencies[key as keyof Currencies]?.name}
+                      </Text>
                     </Fragment>
                   ))
                 : 'No data 😔'}
@@ -137,7 +143,10 @@ export function CountryCard({
                 ? Object.keys(country.languages).map((key, i) => (
                     <Fragment key={key}>
                       {i > 0 && ', '}
-                      <Text as="span">{country.languages[key]}</Text>
+                      <Text as="span">
+                        {country.languages &&
+                          country.languages[key as keyof Languages]}
+                      </Text>
                     </Fragment>
                   ))
                 : 'No data 😔'}
@@ -179,6 +188,7 @@ export function CountryCard({
                 key={key}
                 as={Link}
                 href={`/country/${key.toLowerCase()}`}
+                textTransform="capitalize"
               >
                 {key}
               </Button>
