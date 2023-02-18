@@ -62,7 +62,7 @@ export type Country = {
   name: {
     common: string;
     official: string;
-    nativeName: {
+    nativeName?: {
       [key: string]: {
         official: string;
         common: string;

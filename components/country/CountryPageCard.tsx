@@ -78,7 +78,9 @@ export function CountryCard({
           <GridItem>
             <Text wordBreak="keep-all">
               <Text as="strong">Native Name:</Text>{' '}
-              {Object.values(country.name.nativeName)[0].official}
+              {country.name.nativeName
+                ? Object.values(country.name.nativeName)[0].official
+                : 'No data 😔'}
             </Text>
           </GridItem>
           <GridItem>
@@ -118,23 +120,27 @@ export function CountryCard({
           <GridItem>
             <Text wordBreak="keep-all">
               <Text as="strong">Currencies:</Text>{' '}
-              {Object.keys(country.currencies).map((key, i) => (
-                <Fragment key={key}>
-                  {i > 0 && ', '}
-                  <Text as="span">{country.currencies[key].name}</Text>
-                </Fragment>
-              ))}
+              {country.currencies
+                ? Object.keys(country.currencies).map((key, i) => (
+                    <Fragment key={key}>
+                      {i > 0 && ', '}
+                      <Text as="span">{country.currencies[key].name}</Text>
+                    </Fragment>
+                  ))
+                : 'No data 😔'}
             </Text>
           </GridItem>
           <GridItem>
             <Text wordBreak="keep-all">
               <Text as="strong">Languages:</Text>{' '}
-              {Object.keys(country.languages).map((key, i) => (
-                <Fragment key={key}>
-                  {i > 0 && ', '}
-                  <Text as="span">{country.languages[key]}</Text>
-                </Fragment>
-              ))}
+              {country.languages
+                ? Object.keys(country.languages).map((key, i) => (
+                    <Fragment key={key}>
+                      {i > 0 && ', '}
+                      <Text as="span">{country.languages[key]}</Text>
+                    </Fragment>
+                  ))
+                : 'No data 😔'}
             </Text>
           </GridItem>
           <GridItem>
