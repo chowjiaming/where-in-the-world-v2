@@ -48,8 +48,23 @@ export default function CountryPage(props: CountryPageProps): JSX.Element {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(URL);
-  const countries: Country[] = await res.json();
+  let countries: Country[] = [];
+
+  try {
+    const res = await fetch(URL, {
+      method: 'GET',
+      headers: {
+        // update with your user-agent
+        'User-Agent':
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
+        Accept: 'application/json; charset=UTF-8',
+      },
+    });
+    countries = await res.json();
+  } catch (error) {
+    console.error(error);
+  }
+
   const paths = countries.map((country) => {
     return {
       params: {name: country.name.common.toLowerCase()},
@@ -60,18 +75,46 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch(`${URL}name/${context?.params?.name}`);
-  const country: Country = await res.json();
+  let country = {} as Country;
 
-  const borderCountries = country.borders
-    ? await Promise.all(
-        country.borders.map(async (borderCode) => {
-          const res = await fetch(`${URL}cca3/${borderCode}`);
-          const borderCountries: Country = await res.json();
-          return borderCountries;
-        })
-      )
-    : [];
+  try {
+    const res = await fetch(`${URL}name/${context?.params?.name}`, {
+      method: 'GET',
+      headers: {
+        // update with your user-agent
+        'User-Agent':
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
+        Accept: 'application/json; charset=UTF-8',
+      },
+    });
+    country = await res.json();
+  } catch (error) {
+    console.error(error);
+  }
+
+  let borderCountries: Country[] = [];
+
+  try {
+    borderCountries = country.borders
+      ? await Promise.all(
+          country.borders.map(async (borderCode) => {
+            const res = await fetch(`${URL}cca3/${borderCode}`, {
+              method: 'GET',
+              headers: {
+                // update with your user-agent
+                'User-Agent':
+                  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
+                Accept: 'application/json; charset=UTF-8',
+              },
+            });
+            const borderCountries: Country = await res.json();
+            return borderCountries;
+          })
+        )
+      : [];
+  } catch (error) {
+    console.error(error);
+  }
 
   return {props: {country: country, borderCountries}};
 };

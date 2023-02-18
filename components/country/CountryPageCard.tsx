@@ -33,7 +33,7 @@ export function CountryCard({
     >
       <CardHeader as={Flex} align="baseline">
         <Heading as="h2" size="lg" mr="2">
-          {country.name.common}
+          {country.name.common && country.name.common}
         </Heading>
         {country.coatOfArms.svg && (
           <Box w="8" h="8">
