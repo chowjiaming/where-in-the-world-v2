@@ -1,4 +1,4 @@
-import type {ThemeTypings} from '@chakra-ui/react';
+import {Box, ThemeTypings} from '@chakra-ui/react';
 import {Grid} from '@chakra-ui/react';
 import {useEffect, useState} from 'react';
 import type {Country} from '@/utils/types/country';
@@ -16,7 +16,7 @@ interface Props<Country> extends BasePagination {
 }
 export function CountriesGrid({
   countries,
-  itemsPerPage = 6,
+  itemsPerPage = 8,
 }: Props<Country>): JSX.Element {
   const [countryFilterData, setCountryFilterData] = useState<CountryFilterData>(
     {
@@ -46,14 +46,14 @@ export function CountriesGrid({
   });
 
   return (
-    <>
+    <Box as="section" flex="1" role="contentinfo">
       <CountriesControl
         paginationState={paginationState}
         setCountryFilterData={setCountryFilterData}
         setPagination={setPagination}
       />
       <Grid
-        as="section"
+        role="grid"
         templateColumns={{
           base: 'repeat(1, 1fr)',
           lg: 'repeat(2, 1fr)',
@@ -66,7 +66,7 @@ export function CountriesGrid({
           <CountryCard key={country.name.common} country={country} />
         ))}
       </Grid>
-    </>
+    </Box>
   );
 }
 

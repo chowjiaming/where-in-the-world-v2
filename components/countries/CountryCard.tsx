@@ -20,11 +20,12 @@ export function CountryCard({country}: Props): JSX.Element {
   return (
     <GridItem
       as={Link}
+      role="gridcell"
       href={`/country/${country.name.common.toLowerCase()}`}
       target="_self"
       rel="noopener noreferrer"
     >
-      <Card>
+      <Card role="contentinfo">
         <CardHeader>
           <Heading as="h2" size="lg">
             {country.name.common}

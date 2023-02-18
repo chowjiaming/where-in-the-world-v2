@@ -39,6 +39,7 @@ export default function CountriesControl({
 
   return (
     <Flex
+      role="menu"
       justify="space-between"
       align="center"
       direction={{
@@ -52,6 +53,7 @@ export default function CountriesControl({
       mb="8"
     >
       <InputGroup
+        role="menuitem"
         w={{
           base: 'full',
           lg: '60%',
@@ -73,12 +75,14 @@ export default function CountriesControl({
           }
         />
         <Input
+          role="search"
           flex="2"
           type="text"
           placeholder="Search"
           onChange={handleSearchInput}
         />
         <Select
+          role="select"
           flex="1"
           placeholder="Filter by region"
           onChange={handleRegionFilter}
