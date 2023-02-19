@@ -3,15 +3,15 @@ import {Button, Center, Heading} from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ErrorPage(): JSX.Element {
+export default function FiveHundred(): JSX.Element {
   return (
     <>
       <Meta page="404" />
       <Center flexDir="column" gap="8">
-        <Heading as="h1">Error - Something went wrong 😔</Heading>
+        <Heading as="h1">500 - Server Error 😔</Heading>
         <Image
           src="/svg/404.svg"
-          alt="Error - Something went wrong 😔"
+          alt="500 - Server Error 😔"
           width={300}
           height={300}
           priority
@@ -24,4 +24,4 @@ export default function ErrorPage(): JSX.Element {
   );
 }
 
-ErrorPage.displayName = 'ErrorPage';
+FiveHundred.displayName = 'FiveHundred';

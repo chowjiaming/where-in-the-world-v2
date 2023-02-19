@@ -3,15 +3,15 @@ import {Button, Center, Heading} from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ErrorPage(): JSX.Element {
+export default function FourOhFour(): JSX.Element {
   return (
     <>
       <Meta page="404" />
       <Center flexDir="column" gap="8">
-        <Heading as="h1">Error - Something went wrong 😔</Heading>
+        <Heading as="h1">404 - Page Not Found 😔</Heading>
         <Image
           src="/svg/404.svg"
-          alt="Error - Something went wrong 😔"
+          alt="404 - Page Not Found 😔"
           width={300}
           height={300}
           priority
@@ -24,4 +24,4 @@ export default function ErrorPage(): JSX.Element {
   );
 }
 
-ErrorPage.displayName = 'ErrorPage';
+FourOhFour.displayName = 'FourOhFour';
