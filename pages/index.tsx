@@ -3,11 +3,7 @@ import {useState} from 'react';
 import {Meta} from '@/components/Meta';
 import {CountriesGrid} from '@/components/countries/CountriesGrid';
 import type {Country} from '@/utils/types/country';
-
-const URL =
-  process.env.NODE_ENV === 'development'
-    ? `http://localhost:${process.env.PORT}/api/countries/`
-    : `${process.env.URL}/api/countries/`;
+import {URL} from '@/utils/settings/constants';
 
 type CountriesProps = {
   countries: Country[];
@@ -19,15 +15,7 @@ export const getStaticProps: GetStaticProps = async (): Promise<{
   let countries: Country[] = [];
 
   try {
-    const res = await fetch(URL, {
-      method: 'GET',
-      headers: {
-        // update with your user-agent
-        'User-Agent':
-          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
-        Accept: 'application/json; charset=UTF-8',
-      },
-    });
+    const res = await fetch(URL);
     countries = await res.json();
   } catch (error) {
     console.error(error);

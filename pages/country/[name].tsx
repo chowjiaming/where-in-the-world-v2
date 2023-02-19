@@ -4,13 +4,9 @@ import {Button, ButtonGroup, Container, Icon} from '@chakra-ui/react';
 import {FaArrowLeft, FaHome} from 'react-icons/fa';
 import {Meta} from '@/components/Meta';
 import {CountryCard} from '@/components/country/CountryPageCard';
+import {URL} from '@/utils/settings/constants';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
-
-const URL =
-  process.env.NODE_ENV === 'development'
-    ? `http://localhost:${process.env.PORT}/api/countries/`
-    : `${process.env.URL}/api/countries/`;
 
 export type CountryPageProps = {
   country: Country;
@@ -51,15 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   let countries: Country[] = [];
 
   try {
-    const res = await fetch(URL, {
-      method: 'GET',
-      headers: {
-        // update with your user-agent
-        'User-Agent':
-          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
-        Accept: 'application/json; charset=UTF-8',
-      },
-    });
+    const res = await fetch(URL);
     countries = await res.json();
   } catch (error) {
     console.error(error);
@@ -78,15 +66,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   let country = {} as Country;
 
   try {
-    const res = await fetch(`${URL}name/${context?.params?.name}`, {
-      method: 'GET',
-      headers: {
-        // update with your user-agent
-        'User-Agent':
-          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
-        Accept: 'application/json; charset=UTF-8',
-      },
-    });
+    const res = await fetch(`${URL}name/${context?.params?.name}`);
     country = await res.json();
   } catch (error) {
     console.error(error);
@@ -98,15 +78,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     borderCountries = country.borders
       ? await Promise.all(
           country.borders.map(async (borderCode) => {
-            const res = await fetch(`${URL}cca3/${borderCode}`, {
-              method: 'GET',
-              headers: {
-                // update with your user-agent
-                'User-Agent':
-                  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
-                Accept: 'application/json; charset=UTF-8',
-              },
-            });
+            const res = await fetch(`${URL}cca3/${borderCode}`);
             const borderCountries: Country = await res.json();
             return borderCountries;
           })
