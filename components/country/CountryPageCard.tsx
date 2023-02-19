@@ -17,13 +17,14 @@ import {
 import {Fragment} from 'react';
 import type {Currencies, Languages} from '@/utils/types/country';
 import type {CountryPageProps} from '@/pages/country/[name]';
+import {useRouter} from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export function CountryCard({
   country,
   borderCountries,
 }: CountryPageProps): JSX.Element {
+  const router = useRouter();
   return (
     <Card
       mt={{
@@ -70,136 +71,143 @@ export function CountryCard({
             />
           </Tooltip>
         </Box>
-        <Grid
-          flex="1"
-          templateColumns="repeat(2, 1fr)"
-          gap={{
-            base: '4',
-            lg: '8',
-          }}
-        >
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Native Name:</Text>{' '}
-              {country.name.nativeName
-                ? Object.values(country.name.nativeName)[0].official
-                : 'No data 😔'}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Population:</Text>{' '}
-              {country.population.toLocaleString()}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Region:</Text> {country.region}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Sub Region:</Text> {country.subregion}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Capital:</Text>{' '}
-              {country.capital ? country.capital : 'No data 😔'}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Top Level Domain:</Text>{' '}
-              {country.tld
-                ? country.tld.map((key, i) => (
-                    <Fragment key={key}>
-                      {i > 0 && ', '}
-                      <Text as="span">{key}</Text>
-                    </Fragment>
-                  ))
-                : 'No data 😔'}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Currencies:</Text>{' '}
-              {country.currencies
-                ? Object.keys(country.currencies).map((key, i) => (
-                    <Fragment key={key}>
-                      {i > 0 && ', '}
-                      <Text as="span" textTransform="capitalize">
-                        {country.currencies &&
-                          country.currencies[key as keyof Currencies]?.name}
-                      </Text>
-                    </Fragment>
-                  ))
-                : 'No data 😔'}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Languages:</Text>{' '}
-              {country.languages
-                ? Object.keys(country.languages).map((key, i) => (
-                    <Fragment key={key}>
-                      {i > 0 && ', '}
-                      <Text as="span">
-                        {country.languages &&
-                          country.languages[key as keyof Languages]}
-                      </Text>
-                    </Fragment>
-                  ))
-                : 'No data 😔'}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">
-                {!!country.demonyms &&
-                  `Demonym${
-                    country.demonyms.eng.m === country.demonyms.eng.f ? '' : 's'
-                  }:`}
-              </Text>{' '}
-              {country.demonyms ? (
-                <Text as="span" textTransform="capitalize">
-                  {country.demonyms.eng.m === country.demonyms.eng.f
-                    ? country.demonyms.eng.m
-                    : `${country.demonyms.eng.m}, ${country.demonyms.eng.f}`}
-                </Text>
-              ) : (
-                'No data 😔'
-              )}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Start of Week:</Text>{' '}
-              {country.startOfWeek ? (
-                <Text as="span" textTransform="capitalize">
-                  {country.startOfWeek}
-                </Text>
-              ) : (
-                'No data 😔'
-              )}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">Independent:</Text>{' '}
-              {country.independent ? 'Yes' : 'No'}
-            </Text>
-          </GridItem>
-          <GridItem>
-            <Text wordBreak="keep-all">
-              <Text as="strong">UN Member:</Text>{' '}
-              {country.unMember ? 'Yes' : 'No'}
-            </Text>
-          </GridItem>
-        </Grid>
+        <Box flex="1" w="full">
+          <Heading as="h3" size="lg" mb="8">
+            Country Info
+          </Heading>
+          <Grid
+            templateColumns="repeat(2, 1fr)"
+            columnGap={{
+              base: '4',
+              lg: '8',
+            }}
+            rowGap="4"
+          >
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Native Name:</Text>{' '}
+                {country.name.nativeName
+                  ? Object.values(country.name.nativeName)[0].official
+                  : 'No data 😔'}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Population:</Text>{' '}
+                {country.population.toLocaleString()}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Region:</Text> {country.region}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Sub Region:</Text> {country.subregion}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Capital:</Text>{' '}
+                {country.capital ? country.capital : 'No data 😔'}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Top Level Domain:</Text>{' '}
+                {country.tld
+                  ? country.tld.map((key, i) => (
+                      <Fragment key={key}>
+                        {i > 0 && ', '}
+                        <Text as="span">{key}</Text>
+                      </Fragment>
+                    ))
+                  : 'No data 😔'}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Currencies:</Text>{' '}
+                {country.currencies
+                  ? Object.keys(country.currencies).map((key, i) => (
+                      <Fragment key={key}>
+                        {i > 0 && ', '}
+                        <Text as="span" textTransform="capitalize">
+                          {country.currencies &&
+                            country.currencies[key as keyof Currencies]?.name}
+                        </Text>
+                      </Fragment>
+                    ))
+                  : 'No data 😔'}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Languages:</Text>{' '}
+                {country.languages
+                  ? Object.keys(country.languages).map((key, i) => (
+                      <Fragment key={key}>
+                        {i > 0 && ', '}
+                        <Text as="span">
+                          {country.languages &&
+                            country.languages[key as keyof Languages]}
+                        </Text>
+                      </Fragment>
+                    ))
+                  : 'No data 😔'}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">
+                  {!!country.demonyms &&
+                    `Demonym${
+                      country.demonyms.eng.m === country.demonyms.eng.f
+                        ? ''
+                        : 's'
+                    }:`}
+                </Text>{' '}
+                {country.demonyms ? (
+                  <Text as="span" textTransform="capitalize">
+                    {country.demonyms.eng.m === country.demonyms.eng.f
+                      ? country.demonyms.eng.m
+                      : `${country.demonyms.eng.m}, ${country.demonyms.eng.f}`}
+                  </Text>
+                ) : (
+                  'No data 😔'
+                )}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Start of Week:</Text>{' '}
+                {country.startOfWeek ? (
+                  <Text as="span" textTransform="capitalize">
+                    {country.startOfWeek}
+                  </Text>
+                ) : (
+                  'No data 😔'
+                )}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">Independent:</Text>{' '}
+                {country.independent ? 'Yes' : 'No'}
+              </Text>
+            </GridItem>
+            <GridItem>
+              <Text wordBreak="keep-all">
+                <Text as="strong">UN Member:</Text>{' '}
+                {country.unMember ? 'Yes' : 'No'}
+              </Text>
+            </GridItem>
+          </Grid>
+        </Box>
       </CardBody>
       <Divider />
-      <CardFooter as={Flex} justify="center" align="center" gap="4">
+      <CardFooter as={Flex} justify="center" align="center">
         <Text wordBreak="keep-all">
           <Text as="strong">
             Border{' '}
@@ -212,26 +220,28 @@ export function CountryCard({
             }`}
             :
           </Text>{' '}
+          {!borderCountries.length && (
+            <Text as="span" fontWeight="normal">
+              {`${country.name.common} has no bordering countries`}
+            </Text>
+          )}
         </Text>
-        {borderCountries.length ? (
-          <ButtonGroup flexWrap="wrap" gap="4">
-            {borderCountries.map((key) => (
-              <Button
-                key={key}
-                as={Link}
-                href={`/country/${key.toLowerCase()}`}
-                colorScheme="telegram"
-                textTransform="capitalize"
-              >
-                {key}
-              </Button>
-            ))}
-          </ButtonGroup>
-        ) : (
-          <Text as="span" fontWeight="normal">
-            {`${country.name.common} has no bordering countries`}
-          </Text>
-        )}
+        <ButtonGroup flexWrap="wrap" gap="2" ml="2">
+          {!!borderCountries.length && (
+            <>
+              {borderCountries.map((key) => (
+                <Button
+                  key={key}
+                  colorScheme="telegram"
+                  textTransform="capitalize"
+                  onClick={() => router.push(`/country/${key}`)}
+                >
+                  {key}
+                </Button>
+              ))}
+            </>
+          )}
+        </ButtonGroup>
       </CardFooter>
     </Card>
   );

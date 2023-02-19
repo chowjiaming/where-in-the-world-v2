@@ -41,7 +41,10 @@ export function CountriesControl({
     <Flex
       role="menu"
       justify="space-between"
-      align="center"
+      align={{
+        base: 'flex-end',
+        lg: 'center',
+      }}
       direction={{
         base: 'column',
         lg: 'row',

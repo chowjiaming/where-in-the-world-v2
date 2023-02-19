@@ -14,7 +14,12 @@ export function Navbar(): JSX.Element {
       minH="20"
       boxShadow="rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;"
     >
-      <Flex align="center" gap="4" onClick={() => router.push('/')}>
+      <Flex
+        align="center"
+        gap="4"
+        cursor="pointer"
+        onClick={() => router.push('/')}
+      >
         <Image
           src="/svg/logo.svg"
           alt="Where in the World logo"
