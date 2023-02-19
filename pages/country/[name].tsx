@@ -1,12 +1,11 @@
 import type {GetStaticProps, GetStaticPaths} from 'next';
 import type {Country} from '@/utils/types/country';
-import {Button, ButtonGroup, Container, Icon} from '@chakra-ui/react';
-import {FaArrowLeft, FaHome} from 'react-icons/fa';
+import {Button, Container, Icon} from '@chakra-ui/react';
+import {FaHome} from 'react-icons/fa';
 import {Meta} from '@/components/Meta';
 import {CountryCard} from '@/components/country/CountryPageCard';
 import {URL} from '@/utils/settings/constants';
-import {useRouter} from 'next/router';
-import Link from 'next/link';
+import {useRouter} from 'next/navigation';
 
 export type CountryPageProps = {
   country: Country;
@@ -27,16 +26,13 @@ export default function CountryPage(props: CountryPageProps): JSX.Element {
         }}
         flex="1"
       >
-        <ButtonGroup>
-          <Button
-            leftIcon={<Icon as={FaArrowLeft} onClick={() => router.back()} />}
-          >
-            Back
-          </Button>
-          <Button as={Link} leftIcon={<Icon as={FaHome} />} href="/">
-            Home
-          </Button>
-        </ButtonGroup>
+        <Button
+          leftIcon={<Icon as={FaHome} />}
+          colorScheme="telegram"
+          onClick={() => router.push('/')}
+        >
+          Home
+        </Button>
         <CountryCard {...props} />
       </Container>
     </>

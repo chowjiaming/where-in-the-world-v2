@@ -7,7 +7,7 @@ import {CountryFilterData, Regions} from '@/utils/types/filter';
 import {useFilterCountries} from '@/utils/hooks/useFilterCountries';
 import {usePagination} from '@/utils/hooks/usePagination';
 import {CountryCard} from '@/components/countries/CountryCard';
-import CountriesControl from './CountriesControl';
+import {CountriesControl} from '@/components/countries/CountriesControl';
 
 interface Props<Country> extends BasePagination {
   countries: Country[];
@@ -16,7 +16,7 @@ interface Props<Country> extends BasePagination {
 }
 export function CountriesGrid({
   countries,
-  itemsPerPage = 8,
+  itemsPerPage = 10,
 }: Props<Country>): JSX.Element {
   const [countryFilterData, setCountryFilterData] = useState<CountryFilterData>(
     {
@@ -56,9 +56,9 @@ export function CountriesGrid({
         role="grid"
         templateColumns={{
           base: 'repeat(1, 1fr)',
-          lg: 'repeat(2, 1fr)',
-          xl: 'repeat(3, 1fr)',
-          '2xl': 'repeat(4, 1fr)',
+          lg: 'repeat(3, 1fr)',
+          xl: 'repeat(4, 1fr)',
+          '2xl': 'repeat(5, 1fr)',
         }}
         gap="6"
       >

@@ -1,9 +1,10 @@
 import {Meta} from '@/components/Meta';
 import {Button, Center, Heading} from '@chakra-ui/react';
+import {useRouter} from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function ErrorPage(): JSX.Element {
+  const router = useRouter();
   return (
     <>
       <Meta page="404" />
@@ -16,7 +17,7 @@ export default function ErrorPage(): JSX.Element {
           height={300}
           priority
         />
-        <Button as={Link} href="/" colorScheme="blue">
+        <Button colorScheme="telegram" onClick={() => router.push('/')}>
           Go back home
         </Button>
       </Center>

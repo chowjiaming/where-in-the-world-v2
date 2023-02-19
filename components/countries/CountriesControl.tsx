@@ -19,7 +19,7 @@ type Props = {
   setCountryFilterData: Dispatch<SetStateAction<CountryFilterData>>;
   setPagination: Dispatch<SetStateAction<PaginationState>>;
 };
-export default function CountriesControl({
+export function CountriesControl({
   paginationState,
   setCountryFilterData,
   setPagination,
@@ -76,7 +76,10 @@ export default function CountriesControl({
         />
         <Input
           role="search"
-          flex="2"
+          flex={{
+            base: '1',
+            lg: '2',
+          }}
           type="text"
           placeholder="Search"
           onChange={handleSearchInput}
@@ -84,7 +87,7 @@ export default function CountriesControl({
         <Select
           role="select"
           flex="1"
-          placeholder="Filter by region"
+          placeholder="Filter region"
           onChange={handleRegionFilter}
         >
           <option value={Regions.Africa}>Africa</option>
@@ -97,6 +100,7 @@ export default function CountriesControl({
       {paginationState.totalPages > 1 && (
         <Pagination
           {...paginationState}
+          colorScheme="telegram"
           onPageChange={(pageIndex) => {
             setPagination((prevState) => ({
               ...prevState,
@@ -108,3 +112,5 @@ export default function CountriesControl({
     </Flex>
   );
 }
+
+CountriesControl.displayName = 'CountriesControl';

@@ -12,7 +12,7 @@ export function Footer(): JSX.Element {
       gap="1"
       pt="2"
       pb="1"
-      boxShadow="rgba(0, 0, 0, 0.1) 0px -20px 25px -5px, rgba(0, 0, 0, 0.04) 0px -10px 10px -5px"
+      boxShadow="rgba(0, 0, 0, 0.1) 0px -10px 15px -3px, rgba(0, 0, 0, 0.05) 0px -4px 6px -2px;"
     >
       <Text fontSize="sm" color="subtle">
         Made with ❤️ by{' '}

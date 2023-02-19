@@ -33,7 +33,7 @@ export function CountryCard({
     >
       <CardHeader as={Flex} align="baseline">
         <Heading as="h2" size="lg" mr="2">
-          {country.name.common && country.name.common}
+          {country.name.common}
         </Heading>
         {country.coatOfArms.svg && (
           <Box w="8" h="8">
@@ -88,7 +88,8 @@ export function CountryCard({
           </GridItem>
           <GridItem>
             <Text wordBreak="keep-all">
-              <Text as="strong">Population:</Text> {country.population}
+              <Text as="strong">Population:</Text>{' '}
+              {country.population.toLocaleString()}
             </Text>
           </GridItem>
           <GridItem>
@@ -127,7 +128,7 @@ export function CountryCard({
                 ? Object.keys(country.currencies).map((key, i) => (
                     <Fragment key={key}>
                       {i > 0 && ', '}
-                      <Text as="span">
+                      <Text as="span" textTransform="capitalize">
                         {country.currencies &&
                           country.currencies[key as keyof Currencies]?.name}
                       </Text>
@@ -154,14 +155,45 @@ export function CountryCard({
           </GridItem>
           <GridItem>
             <Text wordBreak="keep-all">
+              <Text as="strong">
+                {!!country.demonyms &&
+                  `Demonym${
+                    country.demonyms.eng.m === country.demonyms.eng.f ? '' : 's'
+                  }:`}
+              </Text>{' '}
+              {country.demonyms ? (
+                <Text as="span" textTransform="capitalize">
+                  {country.demonyms.eng.m === country.demonyms.eng.f
+                    ? country.demonyms.eng.m
+                    : `${country.demonyms.eng.m}, ${country.demonyms.eng.f}`}
+                </Text>
+              ) : (
+                'No data 😔'
+              )}
+            </Text>
+          </GridItem>
+          <GridItem>
+            <Text wordBreak="keep-all">
               <Text as="strong">Start of Week:</Text>{' '}
-              {country.startOfWeek ? country.startOfWeek : 'No data 😔'}
+              {country.startOfWeek ? (
+                <Text as="span" textTransform="capitalize">
+                  {country.startOfWeek}
+                </Text>
+              ) : (
+                'No data 😔'
+              )}
             </Text>
           </GridItem>
           <GridItem>
             <Text wordBreak="keep-all">
               <Text as="strong">Independent:</Text>{' '}
               {country.independent ? 'Yes' : 'No'}
+            </Text>
+          </GridItem>
+          <GridItem>
+            <Text wordBreak="keep-all">
+              <Text as="strong">UN Member:</Text>{' '}
+              {country.unMember ? 'Yes' : 'No'}
             </Text>
           </GridItem>
         </Grid>
@@ -188,6 +220,7 @@ export function CountryCard({
                 key={key}
                 as={Link}
                 href={`/country/${key.toLowerCase()}`}
+                colorScheme="telegram"
                 textTransform="capitalize"
               >
                 {key}

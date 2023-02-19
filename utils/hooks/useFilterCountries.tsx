@@ -22,10 +22,11 @@ export const useFilterCountries = (
     } else if (!filterData.regionFilter && filterData.searchTerm) {
       return searchByTerm(countries, filterData.searchTerm.toLowerCase());
     } else if (filterData.regionFilter && filterData.searchTerm) {
-      return countries.filter(
-        (country) =>
-          country.region === Regions[filterData.regionFilter] &&
-          searchByTerm(countries, filterData.searchTerm.toLowerCase())
+      return searchByTerm(
+        countries.filter(
+          (country) => country.region === Regions[filterData.regionFilter]
+        ),
+        filterData.searchTerm.toLowerCase()
       );
     } else {
       return countries;
