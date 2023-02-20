@@ -9,7 +9,7 @@ type LayoutProps = {
 };
 export function Layout({children}: LayoutProps): JSX.Element {
   return (
-    <Flex direction="column" flex="1" minH="100vh">
+    <Flex direction="column" minH="100vh">
       <Navbar />
       <Main>{children}</Main>
       <Footer />
