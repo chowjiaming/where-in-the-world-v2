@@ -1,9 +1,9 @@
-import {Box, ThemeTypings} from '@chakra-ui/react';
+import {Box, type ThemeTypings} from '@chakra-ui/react';
 import {Grid} from '@chakra-ui/react';
 import {useEffect, useState} from 'react';
 import type {Country} from '@/utils/types/country';
 import type {BasePagination, PaginationState} from '@/utils/types/pagination';
-import {CountryFilterData, Regions} from '@/utils/types/filter';
+import {type CountryFilterData, Regions} from '@/utils/types/filter';
 import {useFilterCountries} from '@/utils/hooks/useFilterCountries';
 import {usePagination} from '@/utils/hooks/usePagination';
 import {CountryCard} from '@/components/countries/CountryCard';

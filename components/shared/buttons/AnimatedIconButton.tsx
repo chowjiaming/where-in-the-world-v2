@@ -1,6 +1,6 @@
-import type {Variants} from 'framer-motion';
-import type {IconType} from 'react-icons';
-import {Icon, Tooltip, chakra, ColorProps} from '@chakra-ui/react';
+import {type Variants} from 'framer-motion';
+import {type IconType} from 'react-icons';
+import {Icon, Tooltip, chakra, type ColorProps} from '@chakra-ui/react';
 import {motion} from 'framer-motion';
 
 type AnimatedIconProps = {

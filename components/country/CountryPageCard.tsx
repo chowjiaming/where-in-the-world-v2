@@ -15,8 +15,8 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import {Fragment} from 'react';
-import type {Currencies, Languages} from '@/utils/types/country';
-import type {CountryPageProps} from '@/pages/country/[name]';
+import {type Currencies, type Languages} from '@/utils/types/country';
+import {type CountryPageProps} from '@/pages/country/[name]';
 import {useRouter} from 'next/navigation';
 import Image from 'next/image';
 
@@ -87,7 +87,8 @@ export function CountryCard({
               <Text wordBreak="keep-all">
                 <Text as="strong">Native Name:</Text>{' '}
                 {country.name.nativeName
-                  ? Object.values(country.name.nativeName)[0].official
+                  ? // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                    Object.values(country.name.nativeName)[0].official
                   : 'No data 😔'}
               </Text>
             </GridItem>

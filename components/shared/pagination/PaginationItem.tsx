@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'react';
-import {Button, IconButton, ThemeTypings} from '@chakra-ui/react';
+import {Button, IconButton, type ThemeTypings} from '@chakra-ui/react';
 import {FaChevronRight, FaChevronLeft} from 'react-icons/fa';
 
 type PaginationItemProps = {

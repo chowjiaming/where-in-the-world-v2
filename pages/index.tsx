@@ -1,26 +1,18 @@
-import type {GetStaticProps} from 'next';
+import {type GetStaticProps} from 'next';
 import {useState} from 'react';
 import {Meta} from '@/components/Meta';
 import {CountriesGrid} from '@/components/countries/CountriesGrid';
-import type {Country} from '@/utils/types/country';
+import {type Country} from '@/utils/types/country';
 import {URL} from '@/utils/settings/constants';
+import {api} from '@/utils/api';
 
 type CountriesProps = {
   countries: Country[];
 };
-
 export const getStaticProps: GetStaticProps = async (): Promise<{
   props: CountriesProps;
 }> => {
-  let countries: Country[] = [];
-
-  try {
-    const res = await fetch(URL);
-    countries = await res.json();
-  } catch (error) {
-    console.error(error);
-  }
-
+  const countries = await api<Country[]>(URL);
   return {
     props: {
       countries,

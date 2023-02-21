@@ -8,7 +8,7 @@ import {
   Heading,
   Button,
 } from '@chakra-ui/react';
-import type {Country} from '@/utils/types/country';
+import {type Country} from '@/utils/types/country';
 import {useRouter} from 'next/navigation';
 import Image from 'next/image';
 

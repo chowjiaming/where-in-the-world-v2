@@ -1,6 +1,5 @@
-import type {Dispatch, SetStateAction} from 'react';
-import type {CountryFilterData} from '@/utils/types/filter';
-import {Regions} from '@/utils/types/filter';
+import {type Dispatch, type SetStateAction} from 'react';
+import {type CountryFilterData, Regions} from '@/utils/types/filter';
 import {
   Flex,
   Icon,
@@ -10,8 +9,11 @@ import {
   Select,
 } from '@chakra-ui/react';
 import {FaSearchLocation} from 'react-icons/fa';
-import type {Country} from '@/utils/types/country';
-import type {PaginationState, PaginationType} from '@/utils/types/pagination';
+import {type Country} from '@/utils/types/country';
+import {
+  type PaginationState,
+  type PaginationType,
+} from '@/utils/types/pagination';
 import {Pagination} from '@/components/shared/pagination/Pagination';
 
 type Props = {

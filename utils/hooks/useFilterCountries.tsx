@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
-import {CountryFilterData, Regions} from '@/utils/types/filter';
-import {Country} from '@/utils/types/country';
+import {type CountryFilterData, Regions} from '@/utils/types/filter';
+import {type Country} from '@/utils/types/country';
 
 function searchByTerm(countries: Country[], searchTerm: string): Country[] {
   return countries.filter((country) => {

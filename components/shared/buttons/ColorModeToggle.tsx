@@ -1,4 +1,4 @@
-import type {FlexProps} from '@chakra-ui/react';
+import {type FlexProps} from '@chakra-ui/react';
 import {Flex, useColorMode} from '@chakra-ui/react';
 import {FaSun, FaMoon} from 'react-icons/fa';
 import {AnimatePresence} from 'framer-motion';

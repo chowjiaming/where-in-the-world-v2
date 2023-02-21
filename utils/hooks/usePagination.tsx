@@ -1,9 +1,10 @@
-import {PaginationOptions, PaginationType} from '@/utils/types/pagination';
+import {
+  type PaginationOptions,
+  type PaginationType,
+} from '@/utils/types/pagination';
 
 function generatePagesArray(from: number, to: number): number[] {
-  return [...new Array(to - from)]
-    .map((_, index) => from + index + 1)
-    .filter((page) => page > 0);
+  return new Array(to - from).fill(from).map((_, i) => from + i + 1);
 }
 
 export function usePagination<I>({

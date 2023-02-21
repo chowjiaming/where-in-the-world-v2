@@ -1,4 +1,4 @@
-import {Stack, ThemeTypings} from '@chakra-ui/react';
+import {Stack, type ThemeTypings} from '@chakra-ui/react';
 import {PaginationItem} from '@/components/shared/pagination/PaginationItem';
 
 type PaginationProps = {

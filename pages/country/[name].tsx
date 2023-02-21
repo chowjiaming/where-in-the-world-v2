@@ -5,6 +5,7 @@ import {FaHome} from 'react-icons/fa';
 import {Meta} from '@/components/Meta';
 import {CountryCard} from '@/components/country/CountryPageCard';
 import {URL} from '@/utils/settings/constants';
+import {api} from '@/utils/api';
 import {useRouter} from 'next/navigation';
 
 export type CountryPageProps = {
@@ -40,14 +41,7 @@ export default function CountryPage(props: CountryPageProps): JSX.Element {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  let countries: Country[] = [];
-
-  try {
-    const res = await fetch(URL);
-    countries = await res.json();
-  } catch (error) {
-    console.error(error);
-  }
+  const countries = await api<Country[]>(URL);
 
   const paths = countries.map((country) => {
     return {
@@ -59,30 +53,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  let country = {} as Country;
-
-  try {
-    const res = await fetch(`${URL}name/${context?.params?.name}`);
-    country = await res.json();
-  } catch (error) {
-    console.error(error);
+  if (!context || !context.params || typeof context.params.name !== 'string') {
+    return {notFound: true};
   }
 
-  let borderCountries: Country[] = [];
+  const country = await api<Country>(`${URL}name/${context.params.name}`);
 
-  try {
-    borderCountries = country.borders
-      ? await Promise.all(
-          country.borders.map(async (borderCode) => {
-            const res = await fetch(`${URL}cca3/${borderCode}`);
-            const borderCountries: Country = await res.json();
-            return borderCountries;
-          })
+  const borderCountries = country.borders
+    ? await Promise.all(
+        country.borders.map(
+          async (borderCode) => await api<Country>(`${URL}cca3/${borderCode}`)
         )
-      : [];
-  } catch (error) {
-    console.error(error);
-  }
+      )
+    : [];
 
   return {props: {country: country, borderCountries}};
 };
