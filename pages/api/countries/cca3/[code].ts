@@ -1,8 +1,8 @@
-import type {NextApiRequest, NextApiResponse} from 'next';
-import {Country} from '@/utils/types/country';
+import {type NextApiRequest, type NextApiResponse} from 'next';
+import {type Country} from '@/utils/types/country';
 import data from '@/data/countries.json';
 
-export default async function handler(
+export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<
     | string
@@ -29,8 +29,4 @@ export default async function handler(
   }
 
   return res.status(200).json(country.name.common.toLowerCase());
-
-  // if (country?.borders?.length) {
-  //   return res.status(200).json(country.name.common.toLowerCase());
-  // }
 }
